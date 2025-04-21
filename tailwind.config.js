@@ -6,16 +6,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        sage: '#B2AC88',
+        sageGreen: '#B2AC88',
         beige: '#F7F2E9',
         sand: '#E8DAC8',
-        olive: '#808000',
+        oliveGreen: '#808000',
         darkBrown: '#4A403A',
         lightBrown: '#A48C7A',
         terracotta: '#D26A4E',
       },
-      borderRadius: {
-        '3xl': '1.5rem',
+      fontFamily: {
+        sans: ['var(--font-sans)', 'sans-serif'],
+        serif: ['var(--font-serif)', 'serif'],
       },
     },
   },

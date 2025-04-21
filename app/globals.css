@@ -3,9 +3,11 @@
 @tailwind utilities;
 
 body {
-  @apply font-sans bg-beige text-darkBrown;
+  font-family: var(--font-sans);
+  background-color: #F7F2E9;
+  color: #4A403A;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply font-serif;
+  font-family: var(--font-serif);
 }

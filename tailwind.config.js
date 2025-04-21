@@ -1,24 +1,18 @@
 module.exports = {
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
   theme: {
     extend: {
       colors: {
-        sageGreen: '#B2AC88',
-        beige: '#F7F2E9',
-        sand: '#E8DAC8',
-        oliveGreen: '#808000',
-        darkBrown: '#4A403A',
-        lightBrown: '#A48C7A',
-        terracotta: '#D26A4E',
+        white: '#FFFFFF',
+        softGray: '#F2F2F7',
+        charcoal: '#2C2C2E',
+        graphite: '#181818',
+        accentBlue: '#005EA2',
+        mutedGold: '#B9A16B',
       },
       fontFamily: {
-        sans: ['var(--font-sans)', 'sans-serif'],
-        serif: ['var(--font-serif)', 'serif'],
+        sans: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        serif: ['Playfair Display', 'Georgia', 'serif'],
       },
     },
   },
-  plugins: [],
 };

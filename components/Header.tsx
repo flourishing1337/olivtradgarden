@@ -7,17 +7,14 @@ export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
-    <header className="relative flex justify-between items-center p-4 bg-beige shadow-md">
-      <button
-        onClick={() => setOpenMenu(!openMenu)}
-        className="text-2xl font-bold text-oliveGreen"
-      >
+    <header className="relative flex justify-between items-center p-4 bg-beige text-darkBrown">
+      <button onClick={() => setOpenMenu(!openMenu)}>
         ☰
       </button>
 
-      <h1 className="text-2xl font-serif text-oliveGreen">Olivträdgården</h1>
+      <h1 className="font-serif text-xl font-bold">Olivträdgården</h1>
 
-      <div className="flex items-center gap-4 text-oliveGreen">
+      <div className="flex items-center gap-4">
         <button>🔍</button>
         <button>👤</button>
         <button>🛒</button>

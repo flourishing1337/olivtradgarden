@@ -1,8 +1,9 @@
-// components/ProductList.tsx
+// ---------------------- components/ProductList.tsx ----------------------
 "use client";
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import ProductCard from "./ProductCard";
+import Link from "next/link";
 
 const GET_PRODUCTS = gql`
   query GetProducts($first: Int!) {
@@ -28,11 +29,10 @@ const GET_PRODUCTS = gql`
 `;
 
 export default function ProductList() {
-  const { data, loading, error } = useQuery(GET_PRODUCTS, {
-    variables: { first: 12 },
-  });
+  const { data, loading, error } = useQuery(GET_PRODUCTS, { variables: { first: 12 } });
 
-  if (loading) return <p className="py-12 text-center">Laddar produkter…</p>;
+  if (loading)
+    return <p className="py-12 text-center">Laddar produkter…</p>;
   if (error)
     return (
       <p className="py-12 text-center text-red-600">
@@ -52,6 +52,13 @@ export default function ProductList() {
         {products.map((prod: any) => (
           <ProductCard key={prod.id} product={prod} />
         ))}
+      </div>
+      <div className="text-center mt-8">
+        <Link href="/products">
+          <button className="px-6 py-2 border-2 rounded hover:bg-gray-100 transition">
+            Se alla produkter
+          </button>
+        </Link>
       </div>
     </section>
   );

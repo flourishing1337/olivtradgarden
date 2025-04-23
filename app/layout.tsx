@@ -1,25 +1,21 @@
 // app/layout.tsx
-"use client";
 
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import "./globals.css";
 import { ReactNode } from "react";
+import { Providers } from "./providers";  // our Client wrapper
 
-const client = new ApolloClient({
-  uri: process.env.NEXT_PUBLIC_SALEOR_API_URL,
-  cache: new InMemoryCache(),
-  headers: {
-    // if you need auth:
-    ...(process.env.NEXT_PUBLIC_SALEOR_TOKEN && {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_SALEOR_TOKEN}`,
-    }),
-  },
-});
+export const metadata = {
+  title: "Olivträdgården",
+  description: "Din butik för exklusiva olivträd",
+};
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="sv">
       <body>
-        <ApolloProvider client={client}>{children}</ApolloProvider>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

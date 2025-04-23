@@ -9,31 +9,30 @@ interface ProductCardProps {
     id: string;
     name: string;
     thumbnail: { url: string; alt?: string };
-    variants?: { edges: Array<{ node: any }> };
+    variants?: { edges: Array<{ node: { pricing: { price: { gross: { amount: number; currency: string } } } } }> };
   };
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const firstVariant = product.variants?.edges[0]?.node;
-  if (!firstVariant) return null;
-  const { amount, currency } = firstVariant.pricing.price.gross;
+  const node = product.variants?.edges[0]?.node;
+  if (!node) return null;
+  const { amount, currency } = node.pricing.price.gross;
 
   return (
-    <Link href={`/products/${product.id}`} className="group block">
-      <a className="block rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition">
-        <div className="relative w-full h-64 sm:h-72 lg:h-80">
+    <Link href={`/products/${product.id}`} className="block">
+      <a className="block">
+        <div className="border rounded-lg overflow-hidden shadow hover:shadow-2xl transition-shadow p-4">
           <Image
             src={product.thumbnail.url}
-            alt={product.thumbnail.alt || product.name}
-            fill
-            className="object-cover group-hover:scale-105 transition"
+            alt={product.thumbnail.alt ?? product.name}
+            width={300}
+            height={300}
+            className="object-cover w-full h-64"
           />
-        </div>
-        <div className="p-4 bg-white">
-          <h3 className="text-lg font-semibold mb-2 text-gray-900">
+          <h3 className="mt-2 text-lg font-semibold text-gray-800 truncate">
             {product.name}
           </h3>
-          <p className="text-xl font-bold text-gray-900">
+          <p className="mt-1 text-gray-700">
             {amount.toLocaleString("sv-SE")} {currency}
           </p>
         </div>

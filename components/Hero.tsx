@@ -1,4 +1,4 @@
-// components/Hero.tsx
+// ---------------------- components/Hero.tsx ----------------------
 "use client";
 import React from "react";
 
@@ -6,7 +6,7 @@ interface HeroProps {
   title?: string;
   subtitle?: string;
   buttonText?: string;
-  videoSrc: string;       // e.g. "/video.mp4"
+  videoSrc: string;                   // required now
   onButtonClick?: () => void;
 }
 
@@ -21,7 +21,7 @@ export default function Hero({
     <section className="relative h-[80vh] md:h-screen overflow-hidden">
       <video
         className="absolute top-0 left-0 w-full h-full object-cover"
-        src="/videos/hero.mp4"
+        src={videoSrc}
         autoPlay
         muted
         loop

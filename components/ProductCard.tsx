@@ -1,19 +1,43 @@
-import Image from 'next/image';
+// ---------------------- components/ProductCard.tsx ----------------------
+"use client";
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 interface ProductCardProps {
-  image: string;
-  title: string;
-  price: number;
+  product: {
+    id: string;
+    name: string;
+    thumbnail: { url: string; alt?: string };
+    variants?: { edges: Array<{ node: any }> };
+  };
 }
 
-export default function ProductCard({ image, title, price }: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
+  const firstVariant = product.variants?.edges[0]?.node;
+  if (!firstVariant) return null;
+  const { amount, currency } = firstVariant.pricing.price.gross;
+
   return (
-    <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <Image src={image} alt={title} width={500} height={500} className="object-cover" />
-      <div className="p-4 text-center">
-        <h3 className="font-serif text-xl font-semibold text-gray-900 mb-2">{title}</h3>
-        <p className="font-sans text-lg text-gray-600">{price.toLocaleString()} kr</p>
-      </div>
-    </div>
+    <Link href={`/products/${product.id}`} className="group block">
+      <a className="block rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition">
+        <div className="relative w-full h-64 sm:h-72 lg:h-80">
+          <Image
+            src={product.thumbnail.url}
+            alt={product.thumbnail.alt || product.name}
+            fill
+            className="object-cover group-hover:scale-105 transition"
+          />
+        </div>
+        <div className="p-4 bg-white">
+          <h3 className="text-lg font-semibold mb-2 text-gray-900">
+            {product.name}
+          </h3>
+          <p className="text-xl font-bold text-gray-900">
+            {amount.toLocaleString("sv-SE")} {currency}
+          </p>
+        </div>
+      </a>
+    </Link>
   );
 }

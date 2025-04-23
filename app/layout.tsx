@@ -1,18 +1,26 @@
-import { Inter, Playfair_Display } from 'next/font/google';
-import './globals.css';
+// app/layout.tsx
+"use client";
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
-const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-serif' });
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { ReactNode } from "react";
 
-export const metadata = {
-  title: 'Olivträdgården',
-  description: 'Din specialist på olivträd.',
-};
+const client = new ApolloClient({
+  uri: process.env.NEXT_PUBLIC_SALEOR_API_URL,
+  cache: new InMemoryCache(),
+  headers: {
+    // if you need auth:
+    ...(process.env.NEXT_PUBLIC_SALEOR_TOKEN && {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_SALEOR_TOKEN}`,
+    }),
+  },
+});
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="sv" className={`${inter.variable} ${playfair.variable}`}>
-      <body>{children}</body>
+    <html lang="sv">
+      <body>
+        <ApolloProvider client={client}>{children}</ApolloProvider>
+      </body>
     </html>
   );
 }
